@@ -1,0 +1,11 @@
+{
+  "name": "async-group",
+  "version": "1.0.0",
+  "description": "Allows the throttling of a series of promises which would otherwise cause unwanted effects, such as creating too many tcp connections.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
