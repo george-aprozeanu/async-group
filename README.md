@@ -9,9 +9,9 @@ such as HTTP requests.
 ```
 // The requests will be executed atmost 3 in parallel.
 $q = new AsyncGroup(3)
-$q.run(() => http.get("http://example.com")
-$q.run(() => http.get("http://example.com")
-$q.run(() => http.get("http://example.com")
-$q.run(() => http.get("http://example.com")
-$q.run(() => http.get("http://example.com")
+$q.run(() => http.get("http://example.com"))
+$q.run(() => http.get("http://example.com"))
+$q.run(() => http.get("http://example.com"))
+$q.run(() => http.get("http://example.com"))
+$q.run(() => http.get("http://example.com"))
 ```
