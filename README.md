@@ -1,7 +1,5 @@
 # async-group
 
-## Description
-
 Allows the execution of asynchronous tasks in a throttled manner.
 This is useful when executing promises which could have unwanted external effects,
 such as HTTP requests.
