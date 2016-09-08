@@ -1,7 +1,7 @@
 import * as asg from "./index";
 import * as http from "http";
 
-let $q = new asg.AsyncGroup(3);
+
 
 function NodePromise(nodeFn: Function) {
   return function (...args: any[]) {
@@ -44,6 +44,8 @@ function log(msg): Promise<any> {
     resolve();
   })
 }
+
+let $q = new asg.AsyncGroup(3);
 
 log("request")
   .then(() => $q.run(() => NodeStreamPromise(http.get)({ hostname: 'example.com' })))
