@@ -27,11 +27,11 @@ export class AsyncGroup {
     this.next();
     return task.outerPromise;
   }
-  next() {
+  private next() {
     if (this.queue.length && this.active < this.maxConcurrent) {
       let task = this.queue.shift();
       this.active++;
-      task.start;
+      task.start();
     }
   }
 }

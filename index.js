@@ -34,7 +34,7 @@ var AsyncGroup = (function () {
         if (this.queue.length && this.active < this.maxConcurrent) {
             var task = this.queue.shift();
             this.active++;
-            task.start;
+            task.start();
         }
     };
     return AsyncGroup;
