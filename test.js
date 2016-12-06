@@ -1,7 +1,6 @@
 "use strict";
 var asg = require("./index");
 var http = require("http");
-var $q = new asg.AsyncGroup(3);
 function NodePromise(nodeFn) {
     return function () {
         var _this = this;
@@ -66,9 +65,10 @@ function NodeStreamPromise(nodeFn) {
 function log(msg) {
     return new Promise(function (resolve, reject) {
         console.log(msg);
-        resolve();
+        resolve(msg);
     });
 }
+var $q = new asg.AsyncGroup(3);
 log("request")
     .then(function () { return $q.run(function () { return NodeStreamPromise(http.get)({ hostname: 'example.com' }); }); })
     .then(function (data) { return console.log(data.toString('utf-8').length); });
@@ -96,3 +96,4 @@ log("request")
 log("request")
     .then(function () { return $q.run(function () { return NodeStreamPromise(http.get)({ hostname: 'example.com' }); }); })
     .then(function (data) { return console.log(data.toString('utf-8').length); });
+//# sourceMappingURL=test.js.map

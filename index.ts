@@ -3,7 +3,7 @@ class AsyncTask<T> {
   outerResolve: (t: T | PromiseLike<T>) => void;
   outerReject: (e: any) => void;
   constructor(private promiseFn: () => PromiseLike<T>) {
-    this.outerPromise = new Promise<T>((resolve, reject) => {
+    this.outerPromise = new Promise<T>((resolve:(a:any) => any, reject:(e:Error) => any) => {
       this.outerResolve = resolve;
       this.outerReject = reject;
     });
@@ -20,7 +20,7 @@ export class AsyncGroup {
   }
   run<T>(promiseFn: () => PromiseLike<T>) {
     let task = new AsyncTask(promiseFn);
-    let pass = _ => _;
+    let pass = (_:any) => _;
     task.outerPromise.then(pass, pass)
       .then(_ => { this.active--; this.next(); });
     this.queue.push(task);

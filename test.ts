@@ -5,8 +5,8 @@ import * as http from "http";
 
 function NodePromise(nodeFn: Function) {
   return function (...args: any[]) {
-    return new Promise<any>((resolve, reject) => {
-      args.push(function (err, data) {
+    return new Promise<any>((resolve:(a:any) => any, reject:(e:Error) => any) => {
+      args.push(function (err:Error, data:any) {
         if (err) { console.error(err); reject(err) } else { resolve(data) }
       })
       try { nodeFn.apply(this, args) } catch (e) { console.error(e); reject(e) }
@@ -16,7 +16,7 @@ function NodePromise(nodeFn: Function) {
 
 function NodeStreamPromise(nodeFn: Function) {
   return function (...args: any[]) {
-    return new Promise<any>((resolve, reject) => {
+    return new Promise<any>((resolve:(a:any) => any, reject:(e:Error) => any) => {
       let buffer = new Buffer(0);
       args.push(function (stream: any) {
         stream.on('data', (data: Buffer) => {
@@ -25,7 +25,7 @@ function NodeStreamPromise(nodeFn: Function) {
           data.copy(nbuffer, buffer.length);
           buffer = nbuffer;
         })
-        stream.on('error', error => {
+        stream.on('error', (error:Error) => {
           console.error(error);
           reject(error);
         })
@@ -38,10 +38,10 @@ function NodeStreamPromise(nodeFn: Function) {
   }
 }
 
-function log(msg): Promise<any> {
-  return new Promise((resolve, reject) => {
+function log(msg:any): Promise<any> {
+  return new Promise((resolve:(a:any) => any, reject: (e:Error) => any) => {
     console.log(msg);
-    resolve();
+    resolve(msg);
   })
 }
 
