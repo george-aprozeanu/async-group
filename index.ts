@@ -3,6 +3,8 @@ class AsyncTask<T> {
   outerResolve: (t: T | PromiseLike<T>) => void;
   outerReject: (e: any) => void;
   constructor(private promiseFn: () => PromiseLike<T>) {
+    this.outerResolve = (a) => undefined;
+    this.outerReject = (e) => undefined;
     this.outerPromise = new Promise<T>((resolve:(a:any) => any, reject:(e:Error) => any) => {
       this.outerResolve = resolve;
       this.outerReject = reject;
@@ -28,10 +30,12 @@ export class AsyncGroup {
     return task.outerPromise;
   }
   private next() {
-    if (this.queue.length && this.active < this.maxConcurrent) {
+    if (this.active < this.maxConcurrent) {
       let task = this.queue.shift();
-      this.active++;
-      task.start();
+      if (task) {
+          this.active++;
+          task.start();
+      }
     }
   }
 }
