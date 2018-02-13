@@ -11,7 +11,8 @@
   "dependencies": {},
   "devDependencies": {
     "@types/es6-promise": "0.0.32",
-    "@types/node": "0.0.2"
+    "@types/node": "0.0.2",
+    "typescript": "^2.7.1"
   },
   "repository": {
     "type": "git",
